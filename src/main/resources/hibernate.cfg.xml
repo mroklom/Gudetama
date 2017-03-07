@@ -5,10 +5,13 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/gudetama</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <!-- Enable thread-bound strategy -->
+        <property name="hbm2ddl.auto">create-drop</property>
+
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="fr.crystalgems.gudetama.model.Video"/>
         <mapping class="fr.crystalgems.gudetama.model.Category"/>
@@ -16,6 +19,5 @@
         <mapping class="fr.crystalgems.gudetama.model.Subtitle"/>
         <mapping class="fr.crystalgems.gudetama.model.Rating"/>
         <!-- DB schema will be updated if needed -->
-        <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>
 </hibernate-configuration>

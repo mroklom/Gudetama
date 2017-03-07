@@ -1,9 +1,6 @@
 package fr.crystalgems.gudetama.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * Handle the definition of a rating in or model
@@ -11,8 +8,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class Rating {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
+    @Column(nullable = false)
     private int value;
     @OneToOne
     private Subtitle subtitle;

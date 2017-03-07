@@ -1,10 +1,8 @@
 package fr.crystalgems.gudetama.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * handle the definition of a user in our model
@@ -12,21 +10,26 @@ import java.util.HashSet;
 @Entity
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
+    @Column(nullable = false)
     private String pseudo;
     @Basic
+    @Column(nullable = false)
     private String email;
     @Basic
+    @Column(nullable = false)
     private String password;
     @Basic
+    @Column(nullable = false)
     private boolean admin;
     @OneToMany
-    private HashSet<Video> bookmarks;
+    private Set<Video> bookmarks;
     @OneToMany
-    private HashSet<Subtitle> subtitles;
+    private Set<Subtitle> subtitles;
     @OneToMany
-    private HashSet<Rating> ratings;
+    private Set<Rating> ratings;
 
     public int getId() {
         return id;
@@ -68,7 +71,7 @@ public class User {
         this.admin = admin;
     }
 
-    public HashSet<Video> getBookmarks() {
+    public Set<Video> getBookmarks() {
         return bookmarks;
     }
 
@@ -76,7 +79,7 @@ public class User {
         this.bookmarks = bookmark;
     }
 
-    public HashSet<Subtitle> getSubtitles() {
+    public Set<Subtitle> getSubtitles() {
         return subtitles;
     }
 
@@ -84,7 +87,7 @@ public class User {
         this.subtitles = subtiltes;
     }
 
-    public HashSet<Rating> getRatings() {
+    public Set<Rating> getRatings() {
         return ratings;
     }
 

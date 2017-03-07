@@ -1,8 +1,6 @@
 package fr.crystalgems.gudetama.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * handle the definition of category in our model
@@ -10,8 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class Category {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
+    @Column(nullable = false)
     private String name;
 
     public int getId() {

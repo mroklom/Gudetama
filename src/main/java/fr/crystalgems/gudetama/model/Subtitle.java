@@ -1,7 +1,7 @@
 package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.Set;
 
 /**
  * handle the definition of the subtitles in our model
@@ -9,13 +9,15 @@ import java.util.HashSet;
 @Entity
 public class Subtitle {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
+    @Column(nullable = false)
     private String path;
     @ManyToOne
     private User publisher;
     @OneToMany
-    private HashSet<Rating> ratings;
+    private Set<Rating> ratings;
 
     public int getId() {
         return id;
@@ -41,11 +43,11 @@ public class Subtitle {
         this.publisher = publisher;
     }
 
-    public HashSet<Rating> getRatings() {
+    public Set<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(HashSet<Rating> ratings) {
+    public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
 }

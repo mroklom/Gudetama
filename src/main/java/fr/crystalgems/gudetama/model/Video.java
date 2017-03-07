@@ -1,8 +1,9 @@
 package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Handle the definition of a video on our model
@@ -10,19 +11,24 @@ import java.util.Date;
 @Entity
 public class Video {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
+    @Column(nullable = false)
     private String path;
     @Basic
+    @Column(nullable = false)
     private String title;
     @Basic
+    @Column(nullable = false)
     private Date releaseDate;
     @Basic
+    @Column(nullable = false)
     private int length;
     @ManyToOne
     private Category category;
     @OneToMany
-    private ArrayList<Subtitle> subtitles;
+    private Set<Subtitle> subtitles;
 
     public Video() {
     }
@@ -75,11 +81,11 @@ public class Video {
         this.category = category;
     }
 
-    public ArrayList<Subtitle> getSubtitles() {
+    public Set<Subtitle> getSubtitles() {
         return subtitles;
     }
 
-    public void setSubtitles(ArrayList<Subtitle> subtitles) {
+    public void setSubtitles(HashSet<Subtitle> subtitles) {
         this.subtitles = subtitles;
     }
 }
