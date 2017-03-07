@@ -10,6 +10,11 @@
         <property name="hibernate.connection.password">root</property>
         <!-- Enable thread-bound strategy -->
         <property name="hibernate.current_session_context_class">thread</property>
+        <mapping class="fr.crystalgems.gudetama.model.Video"/>
+        <mapping class="fr.crystalgems.gudetama.model.Category"/>
+        <mapping class="fr.crystalgems.gudetama.model.User"/>
+        <mapping class="fr.crystalgems.gudetama.model.Subtitle"/>
+        <mapping class="fr.crystalgems.gudetama.model.Rating"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

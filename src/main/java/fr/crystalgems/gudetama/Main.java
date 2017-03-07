@@ -1,3 +1,5 @@
+package fr.crystalgems.gudetama;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
