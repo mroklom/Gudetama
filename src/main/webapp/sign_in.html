@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign up</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <nav class="navbar navbar-default bg-faded" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" href="#">
+                    <img src="res\gudetama_houra.png" width="30" height="30" alt="Acceuil">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="videos.html">Videos</a></li>
+                    <li class="active"><a href="a_propos.html">A propos</a></li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#"></a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <h2>Inscription</h2>
+
+            <form class="form-horizontal">
+                <fieldset>
+
+                    <legend>Bienvenue sur Gudetama France !</legend>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Nom d'utilisateur</label>
+                        <div class="col-md-4">
+                            <input id="userName" placeholder="Entrez votre nom d'utilisateur" class="form-control input-md" required="" type="text">
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Email</label>
+                        <div class="col-md-4">
+                            <input id="email" placeholder="Entrez votre email" class="form-control input-md" required="" type="text">
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Mot de passe</label>
+                        <div class="col-md-4">
+                            <input id="password" placeholder="Entrez un mot de passe" class="form-control input-md" required="" type="password">
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Confirmation du mot de passe</label>
+                        <div class="col-md-4">
+                            <input id="passwordConfirmation" placeholder="Confirmez votre mot de passe" class="form-control input-md" required="" type="password">
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="singlebutton"> </label>
+                        <div class="col-md-4">
+                            <button id="registrationButton" class="btn btn-primary">S'inscrire</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
