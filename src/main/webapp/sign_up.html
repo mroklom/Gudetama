@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Connexion</title>
+    <title>Inscription</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -22,10 +22,20 @@
 
     <div class="container">
         <div class="row">
-            <h2>Connexion</h2>
+            <h2>Inscription</h2>
 
             <form class="form-horizontal">
                 <fieldset>
+
+                    <legend>Bienvenue sur Gudetama France !</legend>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Nom d'utilisateur</label>
+                        <div class="col-md-4">
+                            <input id="userName" placeholder="Entrez votre nom d'utilisateur" class="form-control input-md" required="" type="text">
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Email</label>
@@ -44,9 +54,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Confirmation du mot de passe</label>
+                        <div class="col-md-4">
+                            <input id="passwordConfirmation" placeholder="Confirmez votre mot de passe" class="form-control input-md" required="" type="password">
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-md-4 control-label" for="singlebutton"> </label>
                         <div class="col-md-4">
-                            <button id="registrationButton" class="btn btn-primary">Se connecter</button>
+                            <button id="registrationButton" class="btn btn-primary">S'inscrire</button>
                         </div>
                     </div>
 

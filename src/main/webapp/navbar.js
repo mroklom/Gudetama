@@ -15,7 +15,8 @@ document.write('\
               <li><a href="#">Un onglet</a></li>\
           </ul>\
           <ul class="nav navbar-nav navbar-right">\
-              <li><a href="sign_in.html">S\'inscrire</a></li>\
+              <li><a href="sign_in.html">Connexion</a></li>\
+              <li><a href="sign_up.html">Inscription</a></li>\
               <li><a href="about.html">A propos</a></li>\
           </ul>\
       </div>\
