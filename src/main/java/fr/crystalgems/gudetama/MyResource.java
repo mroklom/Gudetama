@@ -1,4 +1,4 @@
-package fr.crystalgems;
+package fr.crystalgems.gudetama;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
