@@ -1,7 +1,7 @@
 package fr.crystalgems.gudetama.service;
 
 import fr.crystalgems.gudetama.hibernate.HibernateUtil;
-import fr.crystalgems.gudetama.model.User;
+import fr.crystalgems.gudetama.model.Video;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -14,20 +14,19 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by Antoine on 14/03/2017.
  */
-
-@Path("/user")
-public class UserService {
+@Path("/video")
+public class VideoService {
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public User getUserByIdInJSON(@PathParam("id") int id) {
-        User user = null;
+    @Produces(MediaType.APPLICATION_JSON + "; charset-UTF-8")
+    public Video getVideoByIdInJSON(@PathParam("id") int id) {
+        Video video = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            user = session.load(User.class, id);
+            video = session.load(Video.class, id);
             tx.commit();
         } catch (RuntimeException e) {
             if (tx != null)
@@ -36,6 +35,6 @@ public class UserService {
         } finally {
             session.close();
         }
-        return user;
+        return video;
     }
 }
