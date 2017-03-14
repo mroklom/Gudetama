@@ -2,7 +2,8 @@ package fr.crystalgems.gudetama.service;
 
 import fr.crystalgems.gudetama.hibernate.HibernateUtil;
 import fr.crystalgems.gudetama.model.User;
-import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,18 +19,22 @@ import javax.ws.rs.core.MediaType;
 public class UserService {
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public User getUserByIdInJSON(@PathParam("id") int id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
         try {
-            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
-            User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, id);
-            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+            tx = session.beginTransaction();
+            User user = session.load(User.class, id);
+            tx.commit();
             return user;
-        } catch (HibernateException e) {
-            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
+        } catch (RuntimeException e) {
+            if (tx != null)
+                tx.rollback();
+            throw e;
+        } finally {
+            session.close();
         }
-        return null;
     }
 }
