@@ -20,7 +20,7 @@ public class UserService {
 
     @GET
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public User getUserByIdInJSON(@PathParam("id") int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
