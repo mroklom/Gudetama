@@ -64,4 +64,14 @@ public class Subtitle {
     public int hashCode() {
         return Objects.hash(path);
     }
+
+    @Override
+    public String toString() {
+        return "Subtitle{" +
+                "id=" + id +
+                ", path='" + path + '\'' +
+                ", publisher=" + publisher +
+                ", ratings=" + ratings +
+                '}';
+    }
 }
