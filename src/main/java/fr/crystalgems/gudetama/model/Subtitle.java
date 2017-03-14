@@ -1,6 +1,7 @@
 package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -49,5 +50,18 @@ public class Subtitle {
 
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subtitle subtitle = (Subtitle) o;
+        return Objects.equals(path, subtitle.path);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(path);
     }
 }

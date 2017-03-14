@@ -3,6 +3,7 @@ package fr.crystalgems.gudetama.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -87,5 +88,19 @@ public class Video {
 
     public void setSubtitles(HashSet<Subtitle> subtitles) {
         this.subtitles = subtitles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Video video = (Video) o;
+        return Objects.equals(title, video.title) &&
+                Objects.equals(category, video.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, category);
     }
 }

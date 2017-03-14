@@ -2,6 +2,7 @@ package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -93,5 +94,18 @@ public class User {
 
     public void setRatings(HashSet<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(pseudo, user.pseudo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pseudo);
     }
 }
