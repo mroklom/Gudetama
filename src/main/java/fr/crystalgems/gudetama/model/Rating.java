@@ -39,13 +39,4 @@ public class Rating {
     public void setSubtitle(Subtitle subtilte) {
         this.subtitle = subtilte;
     }
-
-    @Override
-    public String toString() {
-        return "Rating{" +
-                "id=" + id +
-                ", value=" + value +
-                ", subtitle=" + subtitle +
-                '}';
-    }
 }

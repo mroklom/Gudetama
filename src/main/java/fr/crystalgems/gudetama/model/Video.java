@@ -103,17 +103,4 @@ public class Video {
     public int hashCode() {
         return Objects.hash(title, category);
     }
-
-    @Override
-    public String toString() {
-        return "Video{" +
-                "id=" + id +
-                ", path='" + path + '\'' +
-                ", title='" + title + '\'' +
-                ", releaseDate=" + releaseDate +
-                ", length=" + length +
-                ", category=" + category +
-                ", subtitles=" + subtitles +
-                '}';
-    }
 }
