@@ -9,10 +9,12 @@
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.autocommit">true</property>
+        <!--<property name="hibernate.show_sql">true</property>-->
+        <property name="hbm2ddl.auto">validate</property>
         <!-- Enable thread-bound strategy -->
-        <property name="hbm2ddl.auto">create-drop</property>
-
         <property name="hibernate.current_session_context_class">thread</property>
+
         <mapping class="fr.crystalgems.gudetama.model.Video"/>
         <mapping class="fr.crystalgems.gudetama.model.Category"/>
         <mapping class="fr.crystalgems.gudetama.model.User"/>

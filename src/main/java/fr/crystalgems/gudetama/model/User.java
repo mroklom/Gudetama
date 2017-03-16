@@ -1,7 +1,6 @@
 package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,11 +24,11 @@ public class User {
     @Basic
     @Column(nullable = false)
     private boolean admin;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Video> bookmarks;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Subtitle> subtitles;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 
     public int getId() {
@@ -76,7 +75,7 @@ public class User {
         return bookmarks;
     }
 
-    public void setBookmarks(HashSet<Video> bookmark) {
+    public void setBookmarks(Set<Video> bookmark) {
         this.bookmarks = bookmark;
     }
 
@@ -84,7 +83,7 @@ public class User {
         return subtitles;
     }
 
-    public void setSubtitles(HashSet<Subtitle> subtiltes) {
+    public void setSubtitles(Set<Subtitle> subtiltes) {
         this.subtitles = subtiltes;
     }
 
@@ -92,7 +91,7 @@ public class User {
         return ratings;
     }
 
-    public void setRatings(HashSet<Rating> ratings) {
+    public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
 
