@@ -2,7 +2,6 @@ package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,9 +25,9 @@ public class Video {
     @Basic
     @Column(nullable = false)
     private int length;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Subtitle> subtitles;
 
     public Video() {
@@ -86,7 +85,7 @@ public class Video {
         return subtitles;
     }
 
-    public void setSubtitles(HashSet<Subtitle> subtitles) {
+    public void setSubtitles(Set<Subtitle> subtitles) {
         this.subtitles = subtitles;
     }
 
@@ -95,12 +94,11 @@ public class Video {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Video video = (Video) o;
-        return Objects.equals(title, video.title) &&
-                Objects.equals(category, video.category);
+        return Objects.equals(path, video.path);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, category);
+        return Objects.hash(path);
     }
 }

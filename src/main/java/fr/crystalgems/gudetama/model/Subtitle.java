@@ -15,9 +15,9 @@ public class Subtitle {
     @Basic
     @Column(nullable = false)
     private String path;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User publisher;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 
     public int getId() {
