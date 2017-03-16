@@ -14,7 +14,17 @@ document.write('\
               <li><a href="episodes_list.html">Episodes</a></li>\
               <li><a href="about.html">A propos</a></li>\
           </ul>\
-          <ul class="nav navbar-nav navbar-right">\
+          <ul class="navbar-right">\
+            <form class="navbar-form" role="search">\
+            <div class="input-group">\
+                <input type="text" class="form-control" placeholder="Search" name="q">\
+                <div class="input-group-btn">\
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>\
+                </div>\
+            </div>\
+            </form>\
+          </ul>\
+          <ul class="nav navbar-nav pull-right">\
               <li><a href="sign_in.html">Connexion</a></li>\
               <li><button type="button" class="btn btn-default navbar-btn"><a href="sign_up.html">Inscription</a></button></li>\
           </ul>\

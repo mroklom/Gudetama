@@ -2,6 +2,11 @@
   margin-bottom: 30px;
 }
 
+.alignright {
+  position: relative;
+  float: right;
+}
+
 .btn-outline {
     background-color: transparent;
     color: inherit;
