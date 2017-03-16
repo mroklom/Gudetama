@@ -2,8 +2,6 @@ package fr.crystalgems.gudetama.service;
 
 import fr.crystalgems.gudetama.hibernate.HibernateUtil;
 import fr.crystalgems.gudetama.model.Video;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,26 +12,21 @@ import javax.ws.rs.core.MediaType;
 /**
  * Created by Antoine on 14/03/2017.
  */
-@Path("/video")
+@Path("video")
 public class VideoService {
 
     @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON + "; charset-UTF-8")
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public Video getVideoByIdInJSON(@PathParam("id") int id) {
-        Video video = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
+        Video video;
         try {
-            tx = session.beginTransaction();
-            video = session.load(Video.class, id);
-            tx.commit();
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            video = HibernateUtil.getSessionFactory().getCurrentSession().get(Video.class, id);
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
-            if (tx != null)
-                tx.rollback();
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             throw e;
-        } finally {
-            session.close();
         }
         return video;
     }

@@ -2,40 +2,38 @@ package fr.crystalgems.gudetama.service;
 
 import fr.crystalgems.gudetama.hibernate.HibernateUtil;
 import fr.crystalgems.gudetama.model.User;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by Antoine on 14/03/2017.
  */
 
-@Path("/user")
+@Path("user")
 public class UserService {
 
     @GET
-    @Path("/{id}")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public User getUserByIdInJSON(@PathParam("id") int id) {
-        User user = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
+        User user;
         try {
-            tx = session.beginTransaction();
-            user = session.load(User.class, id);
-            tx.commit();
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            user = HibernateUtil.getSessionFactory().getCurrentSession().get(User.class, id);
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
-            if (tx != null)
-                tx.rollback();
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             throw e;
-        } finally {
-            session.close();
         }
         return user;
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Response createUserInJSON(User user) {
+        String result = "User saved ! " + user;
+        return Response.status(201).entity(result).build();
     }
 }
