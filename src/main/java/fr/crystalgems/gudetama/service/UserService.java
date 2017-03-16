@@ -33,7 +33,14 @@ public class UserService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public Response createUserInJSON(User user) {
-        String result = "User saved ! " + user;
-        return Response.status(201).entity(result).build();
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            HibernateUtil.getSessionFactory().getCurrentSession().save(user);
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+        return Response.status(201).build();
     }
 }
