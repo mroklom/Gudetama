@@ -9,7 +9,7 @@ document.write('\
           </button>\
           <a class="navbar-brand" href="index.html">Gudetama France</a>\
       </div>\
-      <div class="navbar-collapse collapse" style="padding-bot:-20px;">\
+      <div class="navbar-collapse collapse">\
           <ul class="nav navbar-nav navbar-left">\
               <li><a href="episodes_list.html">Episodes</a></li>\
               <li><a href="about.html">A propos</a></li>\
