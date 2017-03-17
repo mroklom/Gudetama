@@ -80,5 +80,13 @@
     </form>
 
 </div>
+<script type="text/javascript">
+    if (sessionStorage.getItem('user') != null) {
+        var user = JSON.parse(sessionStorage.getItem('user'));
+        document.getElementById('newUserName').placeholder = user.pseudo;
+        document.getElementById('newEmail').placeholder = user.email;
+    }
+</script>
+
 </body>
 </html>
