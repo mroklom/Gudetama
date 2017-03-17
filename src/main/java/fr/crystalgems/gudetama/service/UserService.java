@@ -71,7 +71,7 @@ public class UserService {
         }
         return null;
     }
-}
+
 
     @GET
     @Path("checkEmail")
