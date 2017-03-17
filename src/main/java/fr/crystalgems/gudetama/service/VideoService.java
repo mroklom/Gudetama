@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Antoine on 14/03/2017.
@@ -29,5 +31,29 @@ public class VideoService {
             throw e;
         }
         return video;
+    }
+
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Video[] getVideoListINJSON() {
+        Video[] videos;
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            List idList = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("select v.id from Video v").list();
+            System.out.println("List size = " + idList.size());
+            videos = new Video[idList.size()];
+            int i = 0;
+            for (Iterator it = idList.iterator(); it.hasNext(); ) {
+                videos[i] = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, ((Integer) it.next()).intValue());
+                System.out.println(videos[i].getTitle());
+                i++;
+            }
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+        return videos;
     }
 }
