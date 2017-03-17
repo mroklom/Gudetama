@@ -16,7 +16,7 @@ document.write('\
           </ul>\
           <ul class="nav navbar-nav pull-right">\
               <li><a href="sign_in.html">Connexion</a></li>\
-              <li><button type="button" class="btn btn-default navbar-btn"><a href="sign_up.html">Inscription</a></button></li>\
+              <li><a href="sign_up.html"><button type="button" class="btn btn-default navbar-btn" style="margin-top:-6px;">Inscription</button></a></li>\
           </ul>\
       </div>\
   </nav>\
