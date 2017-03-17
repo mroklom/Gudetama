@@ -9,14 +9,14 @@ document.write('\
           </button>\
           <a class="navbar-brand" href="index.html">Gudetama France</a>\
       </div>\
-      <div class="navbar-collapse collapse">\
+      <div class="navbar-collapse collapse" style="padding-bot:-20px;">\
           <ul class="nav navbar-nav navbar-left">\
               <li><a href="episodes_list.html">Episodes</a></li>\
               <li><a href="about.html">A propos</a></li>\
           </ul>\
           <ul class="nav navbar-nav pull-right">\
               <li><a href="sign_in.html">Connexion</a></li>\
-              <li><button type="button" class="btn btn-default navbar-btn"><a href="sign_up.html">Inscription</a></button></li>\
+              <li><a href="sign_up.html"><button type="button" class="btn btn-default navbar-btn" style="margin-top:-6px;">Inscription</button></a></li>\
           </ul>\
       </div>\
   </nav>\
