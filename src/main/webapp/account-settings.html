@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paramètres utilisateur</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="navbar.js"></script>
+
+<div class="container">
+    <form class="form-horizontal">
+        <fieldset>
+
+            <legend>Paramètres</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="newUsername">Changer de pseudo</label>
+                <div class="col-md-4">
+                    <input id="newUsername" type="text" placeholder="pseudo" class="form-control input-md">
+                    <!--<span class="help-block">your new email ID</span>-->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="newEmail">Changer d'adresse email</label>
+                <div class="col-md-4">
+                    <input id="newEmail" type="email" placeholder="your current email " class="form-control input-md">
+                    <!--<span class="help-block">your new email ID</span>-->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="newPassword">Nouveau mot de passe</label>
+                <div class="col-md-4">
+                    <input id="newPassword" name="passwordinput" type="password" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="newPasswordConfirmation">Confirmation nouveau mot de
+                    passe</label>
+                <div class="col-md-4">
+                    <input id="newPasswordConfirmation" type="password" class="form-control input-md">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="saveProfile"></label>
+                <div class="col-md-4">
+                    <button id="saveProfile" class="btn btn-primary">Enregistrer les modifications</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-4"></div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="deleteAccount"></label>
+                <div class="col-md-4">
+                    <button id="deleteAccount" class="btn btn-danger">Supprimer son compte</button>
+                </div>
+            </div>
+
+
+        </fieldset>
+    </form>
+
+</div>
+</body>
+</html>
