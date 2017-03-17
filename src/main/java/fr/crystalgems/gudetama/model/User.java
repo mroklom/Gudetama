@@ -8,6 +8,7 @@ import java.util.Set;
  * handle the definition of a user in our model
  */
 @Entity
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +17,7 @@ public class User {
     @Column(nullable = false)
     private String pseudo;
     @Basic
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Basic
     @Column(nullable = false)
@@ -100,7 +101,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(pseudo, user.pseudo);
+        return Objects.equals(email, user.email);
     }
 
     @Override
