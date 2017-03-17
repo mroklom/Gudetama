@@ -14,7 +14,7 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String path;
     @Basic
     @Column(nullable = false)
