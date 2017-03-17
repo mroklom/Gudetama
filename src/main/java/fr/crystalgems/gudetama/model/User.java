@@ -1,7 +1,6 @@
 package fr.crystalgems.gudetama.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,6 +8,7 @@ import java.util.Set;
  * handle the definition of a user in our model
  */
 @Entity
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +17,7 @@ public class User {
     @Column(nullable = false)
     private String pseudo;
     @Basic
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Basic
     @Column(nullable = false)
@@ -25,11 +25,11 @@ public class User {
     @Basic
     @Column(nullable = false)
     private boolean admin;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Video> bookmarks;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Subtitle> subtitles;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 
     public int getId() {
@@ -76,7 +76,7 @@ public class User {
         return bookmarks;
     }
 
-    public void setBookmarks(HashSet<Video> bookmark) {
+    public void setBookmarks(Set<Video> bookmark) {
         this.bookmarks = bookmark;
     }
 
@@ -84,7 +84,7 @@ public class User {
         return subtitles;
     }
 
-    public void setSubtitles(HashSet<Subtitle> subtiltes) {
+    public void setSubtitles(Set<Subtitle> subtiltes) {
         this.subtitles = subtiltes;
     }
 
@@ -92,7 +92,7 @@ public class User {
         return ratings;
     }
 
-    public void setRatings(HashSet<Rating> ratings) {
+    public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
 
@@ -101,7 +101,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(pseudo, user.pseudo);
+        return Objects.equals(email, user.email);
     }
 
     @Override

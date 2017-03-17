@@ -13,7 +13,7 @@ public class Rating {
     @Basic
     @Column(nullable = false)
     private int value;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Subtitle subtitle;
 
     public int getId() {

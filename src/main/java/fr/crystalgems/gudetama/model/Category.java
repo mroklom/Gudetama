@@ -12,7 +12,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Basic
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     public int getId() {
@@ -42,13 +42,5 @@ public class Category {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }
