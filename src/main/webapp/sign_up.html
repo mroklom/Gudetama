@@ -15,64 +15,94 @@
 
 <body>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <script src="navbar.js"></script>
+<script src="navbar.js"></script>
 
-    <div class="container">
-        <div class="row">
-            <h2>Inscription</h2>
+<script type="text/javascript">
+    function sendJSON() {
+        // Something
+        var user = {};
+        user.pseudo = document.getElementById('userName').value;
+        user.email = document.getElementById('email').value;
+        user.password = document.getElementById('password').value;
 
-            <form class="form-horizontal">
-                <fieldset>
+        var userJSON = JSON.stringify(user);
+        alert(userJSON.toString());
 
-                    <legend>Bienvenue sur Gudetama France !</legend>
+        var http = new XMLHttpRequest();
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Nom d'utilisateur</label>
-                        <div class="col-md-4">
-                            <input id="userName" placeholder="Entrez votre nom d'utilisateur" class="form-control input-md" required="" type="text">
-                            <span class="help-block"> </span>
-                        </div>
+        http.open('POST', 'http://localhost:8080/gudetama/webapi/user', true);
+        http.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+        http.onreadystatechange = function () {//Call a function when the state changes.
+            if (http.readyState == 4 && http.status == 201) {
+                window.location.href = 'index.html';
+            }
+        };
+        http.send(userJSON);
+        return false;
+    }
+
+</script>
+
+<div class="container">
+    <div class="row">
+        <h2>Inscription</h2>
+
+        <form id="signUpForm" class="form-horizontal" method="post" onsubmit="return sendJSON()">
+            <fieldset>
+
+                <legend>Bienvenue sur Gudetama France !</legend>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Nom d'utilisateur</label>
+                    <div class="col-md-4">
+                        <input id="userName" placeholder="Entrez votre nom d'utilisateur" class="form-control input-md"
+                               required="" type="text">
+                        <span class="help-block"> </span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Email</label>
-                        <div class="col-md-4">
-                            <input id="email" placeholder="Entrez votre email" class="form-control input-md" required="" type="text">
-                            <span class="help-block"> </span>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Email</label>
+                    <div class="col-md-4">
+                        <input id="email" placeholder="Entrez votre email" class="form-control input-md" required=""
+                               type="email">
+                        <span class="help-block"> </span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Mot de passe</label>
-                        <div class="col-md-4">
-                            <input id="password" placeholder="Entrez un mot de passe" class="form-control input-md" required="" type="password">
-                            <span class="help-block"> </span>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Mot de passe</label>
+                    <div class="col-md-4">
+                        <input id="password" placeholder="Entrez un mot de passe" class="form-control input-md"
+                               required="" type="password">
+                        <span class="help-block"> </span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Confirmation du mot de passe</label>
-                        <div class="col-md-4">
-                            <input id="passwordConfirmation" placeholder="Confirmez votre mot de passe" class="form-control input-md" required="" type="password">
-                            <span class="help-block"> </span>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Confirmation du mot de passe</label>
+                    <div class="col-md-4">
+                        <input id="passwordConfirmation" placeholder="Confirmez votre mot de passe"
+                               class="form-control input-md" required="" type="password">
+                        <span class="help-block"> </span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="singlebutton"> </label>
-                        <div class="col-md-4">
-                            <button id="registrationButton" class="btn btn-primary">S'inscrire</button>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"> </label>
+                    <div class="col-md-4">
+                        <button id="registrationButton" class="btn btn-primary">S'inscrire</button>
                     </div>
+                </div>
 
-                </fieldset>
-            </form>
+            </fieldset>
+        </form>
 
-        </div>
     </div>
+</div>
 
 
 </body>
