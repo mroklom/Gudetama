@@ -6,6 +6,7 @@ import fr.crystalgems.gudetama.model.User;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Created by Antoine on 14/03/2017.
@@ -42,5 +43,31 @@ public class UserService {
             throw e;
         }
         return Response.status(201).build();
+    }
+
+    @GET
+    @Path("checkEmail")
+    @Consumes(MediaType.TEXT_PLAIN + "; charset=UTF-8")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Boolean checkEmail(String email) {
+
+        boolean response = false;
+
+        System.out.println(email);
+
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+
+            List result = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User E where E.email = " + email).list();
+            System.out.println(result.size());
+            response = result.size() == 0;
+
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+
+        return response;
     }
 }
