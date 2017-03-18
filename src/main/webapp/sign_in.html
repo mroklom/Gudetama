@@ -20,11 +20,26 @@
 
     <script src="navbar.js"></script>
 
+    <script type="text/javascript">
+        function connexion() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:8080/gudetama/webapi/user/connexion?email=' + document.getElementById('email').value + "&password=" + document.getElementById('password').value, true);
+            xhr.onreadystatechange = function () {//Call a function when the state changes.
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    sessionStorage.setItem('user', xhr.responseText);
+                    window.location.href = "index.html";
+                }
+            };
+            xhr.send();
+            return false;
+        }
+    </script>
+
     <div class="container">
         <div class="row">
             <h2>Connexion</h2>
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" method="get" onsubmit="return connexion()">
                 <fieldset>
 
                     <div class="form-group">
@@ -36,7 +51,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">Mot de passe</label>
+                        <label class="col-md-4 control-label" for="passwordinput">Mot de passe</label>
                         <div class="col-md-4">
                             <input id="password" placeholder="Entrez un mot de passe" class="form-control input-md" required="" type="password">
                             <span class="help-block"> </span>
