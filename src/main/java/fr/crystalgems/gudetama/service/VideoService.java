@@ -28,6 +28,7 @@ public class VideoService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            e.printStackTrace();
             throw e;
         }
         return video;
@@ -50,6 +51,7 @@ public class VideoService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            e.printStackTrace();
             throw e;
         }
         return videos;
