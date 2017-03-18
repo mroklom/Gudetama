@@ -13,12 +13,18 @@
 </head>
 <body>
 
+<script type="text/javascript">
+    // Redirect the user if he's not connected
+    if (sessionStorage.getItem('user') == null)
+        window.location.href = 'index.html';
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="navbar.js"></script>
 
 <div class="container">
-    <form class="form-horizontal">
+    <form class="form-horizontal" onsubmit="return false">
         <fieldset>
 
             <legend>Paramètres</legend>
@@ -26,7 +32,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newUsername">Changer de pseudo</label>
                 <div class="col-md-4">
-                    <input id="newUsername" type="text" placeholder="pseudo" class="form-control input-md">
+                    <input id="newUsername" type="text" class="form-control input-md">
                     <!--<span class="help-block">your new email ID</span>-->
                 </div>
             </div>
@@ -34,7 +40,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newEmail">Changer d'adresse email</label>
                 <div class="col-md-4">
-                    <input id="newEmail" type="email" placeholder="your current email " class="form-control input-md">
+                    <input id="newEmail" type="email" class="form-control input-md">
                     <!--<span class="help-block">your new email ID</span>-->
                 </div>
             </div>
@@ -81,9 +87,10 @@
 
 </div>
 <script type="text/javascript">
+    // Fill the placeholder form
     if (sessionStorage.getItem('user') != null) {
         var user = JSON.parse(sessionStorage.getItem('user'));
-        document.getElementById('newUserName').placeholder = user.pseudo;
+        document.getElementById('newUsername').placeholder = user.pseudo;
         document.getElementById('newEmail').placeholder = user.email;
     }
 </script>

@@ -63,7 +63,6 @@ public class UserService {
 
         if (user != null) {
             if (user.getPassword().equals(password)) {
-                user.setEmail(null);
                 user.setPassword(null);
                 return user;
             }
