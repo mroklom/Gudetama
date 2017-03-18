@@ -62,7 +62,6 @@ public class UserService {
 
         if (user != null) {
             if (user.getPassword().equals(password)) {
-                user.setEmail(null);
                 user.setPassword(null);
                 return user;
             }
@@ -73,15 +72,11 @@ public class UserService {
     @GET
     @Path("check-email")
     public Boolean checkEmail(@QueryParam("email") String email) {
-
-        System.out.println("Email : " + email);
         boolean response;
-
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 
             List result = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User E where E.email = '" + email + "'").list();
-            System.out.println(result.size());
             response = result.size() == 0;
 
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
@@ -89,7 +84,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             throw e;
         }
-
         return new Boolean(response);
     }
 
@@ -99,11 +93,11 @@ public class UserService {
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
             User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, userForm.getId());
-            if (userForm.getEmail() != null)
+            if (!"".equals(userForm.getEmail()))
                 user.setEmail(userForm.getEmail());
-            if (userForm.getPassword() != null)
+            if (!"".equals(userForm.getPassword()))
                 user.setPassword(userForm.getPassword());
-            if (userForm.getPseudo() != null)
+            if (!"".equals(userForm.getPseudo()))
                 user.setPseudo(userForm.getPseudo());
             HibernateUtil.getSessionFactory().getCurrentSession().update(user);
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();

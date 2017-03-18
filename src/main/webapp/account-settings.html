@@ -13,12 +13,18 @@
 </head>
 <body>
 
+<script type="text/javascript">
+    // Redirect the user if he's not connected
+    if (sessionStorage.getItem('user') == null)
+        window.location.href = 'index.html';
+</script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="navbar.js"></script>
 
 <div class="container">
-    <form class="form-horizontal">
+    <form class="form-horizontal" onsubmit="return false">
         <fieldset>
 
             <legend>Paramètres</legend>
@@ -26,7 +32,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newUsername">Changer de pseudo</label>
                 <div class="col-md-4">
-                    <input id="newUsername" type="text" placeholder="pseudo" class="form-control input-md">
+                    <input id="newUsername" type="text" class="form-control input-md">
                     <!--<span class="help-block">your new email ID</span>-->
                 </div>
             </div>
@@ -34,7 +40,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="newEmail">Changer d'adresse email</label>
                 <div class="col-md-4">
-                    <input id="newEmail" type="email" placeholder="your current email " class="form-control input-md">
+                    <input id="newEmail" type="email" class="form-control input-md">
                     <!--<span class="help-block">your new email ID</span>-->
                 </div>
             </div>
@@ -59,7 +65,9 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="saveProfile"></label>
                 <div class="col-md-4">
-                    <button id="saveProfile" class="btn btn-primary">Enregistrer les modifications</button>
+                    <button id="saveProfile" class="btn btn-primary" onclick="updateUser()">Enregistrer les
+                        modifications
+                    </button>
                 </div>
             </div>
 
@@ -71,7 +79,8 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="deleteAccount"></label>
                 <div class="col-md-4">
-                    <button id="deleteAccount" class="btn btn-danger">Supprimer son compte</button>
+                    <button id="deleteAccount" class="btn btn-danger" onclick="deleteUser()">Supprimer son compte
+                    </button>
                 </div>
             </div>
 
@@ -80,5 +89,66 @@
     </form>
 
 </div>
+<script type="text/javascript">
+    // Fill the placeholder form
+    if (sessionStorage.getItem('user') != null) {
+        var userSession = JSON.parse(sessionStorage.getItem('user'));
+        document.getElementById('newUsername').placeholder = userSession.pseudo;
+        document.getElementById('newEmail').placeholder = userSession.email;
+    }
+
+    // Save user modification
+    function updateUser() {
+        var newUsername = document.getElementById('newUsername').value;
+        var newEmail = document.getElementById('newEmail').value;
+        var newPassword = document.getElementById('newPassword').value;
+        var newPasswordConfirmation = document.getElementById('newPasswordConfirmation').value;
+        // If something changed
+        if (newUsername != '' || newEmail != '' || newPassword != '' || newPasswordConfirmation != '') {
+            // todo : Verification password
+            var xhr = new XMLHttpRequest();
+            var user = {};
+            user.id = JSON.parse(sessionStorage.getItem('user')).id;
+            user.pseudo = newUsername;
+            user.email = newEmail;
+            user.password = newPassword;
+            // Send http request
+            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user', true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var user = JSON.parse(sessionStorage.getItem('user'));
+                    if (newUsername != '')
+                        user.pseudo = newUsername;
+                    if (newEmail != '')
+                        user.email = newEmail;
+                    sessionStorage.setItem('user', JSON.stringify(user));
+                    alert("Votre compte a bien été mis à jour");
+                    window.location.href = 'index.html';
+                }
+            };
+            xhr.send(JSON.stringify(user));
+        }
+        else {
+            //todo Inform user that nothing is changed
+        }
+    }
+
+    //Delete user
+    function deleteUser() {
+        // Send http request
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user/delete', true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert("Votre compte a été supprimé");
+                window.location.href = 'index.html';
+            }
+        };
+        xhr.send(sessionStorage.getItem('user'));
+    }
+</script>
+
 </body>
 </html>

@@ -15,8 +15,8 @@ document.write('\
               <li><a href="about.html">A propos</a></li>\
           </ul>\
           <ul class="nav navbar-nav pull-right">\
-              <li><a href="sign_in.html">Connexion</a></li>\
-              <li><a href="sign_up.html"><button type="button" class="btn btn-default navbar-btn" style="margin-top:-6px;">Inscription</button></a></li>\
+              <li><a href="sign_up.html">Inscription</a></li>\
+              <li><button type="button" class="btn btn-default navbar-btn" onclick="location.href =\'sign_in.html\'">Connexion</button></li>\
           </ul>\
       </div>\
   </nav>\
