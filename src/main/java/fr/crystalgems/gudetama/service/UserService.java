@@ -45,7 +45,6 @@ public class UserService {
         return Response.status(201).build();
     }
 
-    @GET
     @Path("connexion")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public User connexion(@QueryParam("email") String email, @QueryParam("password") String password) {
@@ -71,21 +70,19 @@ public class UserService {
         return null;
     }
 
-
     @GET
-    @Path("checkEmail")
-    @Consumes(MediaType.TEXT_PLAIN + "; charset=UTF-8")
-    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public Boolean checkEmail(String email) {
+    @Path("check-email")
+    public Boolean checkEmail(@QueryParam("email") String email) {
 
         boolean response = false;
 
-        System.out.println(email);
+        System.out.println("Email : " + email);
+        boolean response;
 
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 
-            List result = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User E where E.email = " + email).list();
+            List result = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User E where E.email = '" + email + "'").list();
             System.out.println(result.size());
             response = result.size() == 0;
 
@@ -95,7 +92,7 @@ public class UserService {
             throw e;
         }
 
-        return response;
+        return new Boolean(response);
     }
 
     @PUT
