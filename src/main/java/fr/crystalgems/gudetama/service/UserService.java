@@ -26,7 +26,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
             throw e;
         }
         return user;
@@ -41,7 +40,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
             throw e;
         }
         return Response.status(201).build();
@@ -59,7 +57,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
             throw e;
         }
 
@@ -85,7 +82,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
             throw e;
         }
         return new Boolean(response);
@@ -107,7 +103,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
             throw e;
         }
         return Response.status(200).build();
@@ -124,7 +119,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
-            e.printStackTrace();
             throw e;
         }
         return Response.status(200).build();
