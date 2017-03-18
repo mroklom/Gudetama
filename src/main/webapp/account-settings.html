@@ -65,7 +65,9 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="saveProfile"></label>
                 <div class="col-md-4">
-                    <button id="saveProfile" class="btn btn-primary">Enregistrer les modifications</button>
+                    <button id="saveProfile" class="btn btn-primary" onclick="updateUser()">Enregistrer les
+                        modifications
+                    </button>
                 </div>
             </div>
 
@@ -92,6 +94,43 @@
         var user = JSON.parse(sessionStorage.getItem('user'));
         document.getElementById('newUsername').placeholder = user.pseudo;
         document.getElementById('newEmail').placeholder = user.email;
+    }
+
+    // Save user modification
+    function updateUser() {
+        var newUsername = document.getElementById('newUsername').value;
+        var newEmail = document.getElementById('newEmail').value;
+        var newPassword = document.getElementById('newPassword').value;
+        var newPasswordConfirmation = document.getElementById('newPasswordConfirmation').value;
+        if (newUsername != '' || newEmail != '' || newPassword != '' || newPasswordConfirmation != '') {
+            // todo : Verification password
+            var xhr = new XMLHttpRequest();
+            var user = {};
+            user.id = JSON.parse(sessionStorage.getItem('user')).id;
+            user.pseudo = newUsername;
+            user.email = newEmail;
+            user.password = newPassword;
+
+            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user', true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        var user = JSON.parse(sessionStorage.getItem('user'));
+                        if (newUsername != '')
+                            user.pseudo = newUsername;
+                        if (newEmail != '')
+                            user.email = newEmail;
+                        sessionStorage.setItem('user', JSON.stringify(user));
+                        window.location.href = 'index.html';
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(user));
+        }
+        else {
+            //todo Inform user that nothing is changed
+        }
     }
 </script>
 

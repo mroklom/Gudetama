@@ -103,11 +103,11 @@ public class UserService {
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
             User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, userForm.getId());
-            if (userForm.getEmail() != null)
+            if (!"".equals(userForm.getEmail()))
                 user.setEmail(userForm.getEmail());
-            if (userForm.getPassword() != null)
+            if (!"".equals(userForm.getPassword()))
                 user.setPassword(userForm.getPassword());
-            if (userForm.getPseudo() != null)
+            if (!"".equals(userForm.getPseudo()))
                 user.setPseudo(userForm.getPseudo());
             HibernateUtil.getSessionFactory().getCurrentSession().update(user);
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
