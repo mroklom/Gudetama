@@ -74,8 +74,6 @@ public class UserService {
     @Path("check-email")
     public Boolean checkEmail(@QueryParam("email") String email) {
 
-        boolean response = false;
-
         System.out.println("Email : " + email);
         boolean response;
 
