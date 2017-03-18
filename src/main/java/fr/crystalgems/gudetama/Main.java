@@ -25,18 +25,32 @@ public class Main {
         printempsCategorie.setName("Printemps 2017");
 
         Video video1 = new Video();
-        video1.setTitle("Video 1");
+        video1.setTitle("Episode 1");
         video1.setCategory(noelCategory);
         video1.setLength(144);
-        video1.setPath("/etc//coucou");
+        video1.setPath("res\\gudetama e01.mp4");
         video1.setReleaseDate(new Date(System.currentTimeMillis()));
 
         Video video2 = new Video();
-        video2.setTitle("Video 2");
+        video2.setTitle("Episode 2");
         video2.setCategory(noelCategory);
         video2.setLength(66);
-        video2.setPath("/etc//coucou2");
+        video2.setPath("res\\gudetama e02.mp4");
         video2.setReleaseDate(new Date(System.currentTimeMillis()));
+
+        Video video3 = new Video();
+        video3.setTitle("Episode 3");
+        video3.setCategory(noelCategory);
+        video3.setLength(66);
+        video3.setPath("res\\gudetama e03.mp4");
+        video3.setReleaseDate(new Date(System.currentTimeMillis()));
+
+        Video video4 = new Video();
+        video4.setTitle("Episode 4");
+        video4.setCategory(noelCategory);
+        video4.setLength(66);
+        video4.setPath("res\\gudetama e04.mp4");
+        video4.setReleaseDate(new Date(System.currentTimeMillis()));
 
         User user1 = new User();
         user1.setPseudo("nom");

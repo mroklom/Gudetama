@@ -77,7 +77,6 @@ public class UserService {
         boolean response = false;
 
         System.out.println("Email : " + email);
-        boolean response;
 
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
