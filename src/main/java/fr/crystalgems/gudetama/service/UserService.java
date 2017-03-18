@@ -45,9 +45,36 @@ public class UserService {
         return Response.status(201).build();
     }
 
+    @Path("connexion")
+    @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public User connexion(@QueryParam("email") String email, @QueryParam("password") String password) {
+        User user = null;
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            List users = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User U where U.email = '" + email + "'").list();
+            if (users.iterator().hasNext() && users.size() == 1)
+                user = (User) users.iterator().next();
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                user.setEmail(null);
+                user.setPassword(null);
+                return user;
+            }
+        }
+        return null;
+    }
+
     @GET
     @Path("check-email")
     public Boolean checkEmail(@QueryParam("email") String email) {
+
+        boolean response = false;
 
         System.out.println("Email : " + email);
         boolean response;
@@ -67,4 +94,43 @@ public class UserService {
 
         return new Boolean(response);
     }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Response updateUser(User userForm) {
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, userForm.getId());
+            if (userForm.getEmail() != null)
+                user.setEmail(userForm.getEmail());
+            if (userForm.getPassword() != null)
+                user.setPassword(userForm.getPassword());
+            if (userForm.getPseudo() != null)
+                user.setPseudo(userForm.getPseudo());
+            HibernateUtil.getSessionFactory().getCurrentSession().update(user);
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+        return Response.status(200).build();
+    }
+
+    @PUT
+    @Path("delete")
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Response deleteUser(User userForm) {
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, userForm.getId());
+            HibernateUtil.getSessionFactory().getCurrentSession().delete(user);
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+        return Response.status(200).build();
+    }
+
+
 }
