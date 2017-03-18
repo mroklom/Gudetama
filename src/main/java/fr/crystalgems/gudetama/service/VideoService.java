@@ -41,12 +41,10 @@ public class VideoService {
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
             List idList = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("select v.id from Video v").list();
-            System.out.println("List size = " + idList.size());
             videos = new Video[idList.size()];
             int i = 0;
             for (Iterator it = idList.iterator(); it.hasNext(); ) {
                 videos[i] = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, ((Integer) it.next()).intValue());
-                System.out.println(videos[i].getTitle());
                 i++;
             }
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();

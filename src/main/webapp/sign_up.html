@@ -21,6 +21,38 @@
 <script src="navbar.js"></script>
 
 <script type="text/javascript">
+
+    function validatePassword() {
+        var password = document.getElementById('password').value;
+        var passwordConfirmation = document.getElementById("passwordConfirmation").value;
+        var ok = true;
+        if (password != passwordConfirmation) {
+            ok = false;
+        }
+        return ok;
+    }
+
+    function validateEmail() {
+        var emailToValidate = document.getElementById('email').value;
+
+        var xhr = new XMLHttpRequest();
+
+
+        xhr.open('GET', 'http://localhost:8080/gudetama/webapi/user/check-email?email=' + emailToValidate, true);
+        xhr.setRequestHeader('Content-type', '' + 'text/plain; charset=UTF-8');
+        xhr.onreadystatechange = function () {//Call a function when the state changes.
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(JSON.parse(xhr.responseText));
+                if (JSON.parse(xhr.responseText)) {
+                    sendJSON();
+                } else {
+                    alert('email error');
+                }
+            }
+        };
+        xhr.send(emailToValidate);
+    }
+    
     function sendJSON() {
         // Something
         var user = {};
@@ -41,6 +73,19 @@
             }
         };
         http.send(userJSON);
+    }
+
+    function sendForm() {
+        var passwordOk = validatePassword();
+
+        if (passwordOk) {
+            validateEmail();
+            //sendJSON();
+        } else {
+            //todo show error
+            alert('password error');
+        }
+
         return false;
     }
 
@@ -50,7 +95,7 @@
     <div class="row">
         <h2>Inscription</h2>
 
-        <form id="signUpForm" class="form-horizontal" method="post" onsubmit="return sendJSON()">
+        <form id="signUpForm" class="form-horizontal" method="post" onsubmit="return sendForm()">
             <fieldset>
 
                 <legend>Bienvenue sur Gudetama France !</legend>
@@ -74,7 +119,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">Mot de passe</label>
+                    <label class="col-md-4 control-label" for="passwordinput">Mot de passe</label>
                     <div class="col-md-4">
                         <input id="password" placeholder="Entrez un mot de passe" class="form-control input-md"
                                required="" type="password">
@@ -83,7 +128,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">Confirmation du mot de passe</label>
+                    <label class="col-md-4 control-label" for="passwordinput">Confirmation du mot de passe</label>
                     <div class="col-md-4">
                         <input id="passwordConfirmation" placeholder="Confirmez votre mot de passe"
                                class="form-control input-md" required="" type="password">
@@ -92,7 +137,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="singlebutton"> </label>
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
                     <div class="col-md-4">
                         <button id="registrationButton" class="btn btn-primary">S'inscrire</button>
                     </div>
