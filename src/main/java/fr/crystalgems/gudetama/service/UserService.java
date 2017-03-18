@@ -72,17 +72,11 @@ public class UserService {
     @GET
     @Path("check-email")
     public Boolean checkEmail(@QueryParam("email") String email) {
-
-        boolean response = false;
-
-        System.out.println("Email : " + email);
         boolean response;
-
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 
             List result = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User E where E.email = '" + email + "'").list();
-            System.out.println(result.size());
             response = result.size() == 0;
 
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
@@ -90,7 +84,6 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             throw e;
         }
-
         return new Boolean(response);
     }
 
