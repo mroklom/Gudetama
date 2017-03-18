@@ -25,7 +25,7 @@ public class User {
     @Basic
     @Column(nullable = false)
     private boolean admin;
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Video> bookmarks;
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Subtitle> subtitles;
