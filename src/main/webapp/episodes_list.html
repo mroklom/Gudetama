@@ -20,29 +20,6 @@
 
 <body>
 
-<!--<script type="text/javascript">
-    var xhr = new XMLHttpRequest();
-    var videolist;
-    xhr.open('GET', 'http://localhost:8080/gudetama/webapi/video/list', true);
-    xhr.onreadystatechange = function () {//Call a function when the state changes.
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            videolist = JSON.parse(xhr.responseText);
-            //alert(videolist[0].category.name);
-
-
-            for (var i = 0; i < videolist.length; i++) {
-                document.write(videolist[i].title);
-                //alert(videolist[i].title);
-
-
-            }
-        }
-    };
-
-    xhr.send();
-
-</script>-->
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -57,25 +34,19 @@
 </div>
 
 
-<div class="list-group">
+<div class="list-group" id="videoListDiv">
 
     <script type="text/javascript">
         var xhr = new XMLHttpRequest();
-        var videolist;
+        var videoList;
+        var currentDiv = document.getElementById('videoListDiv');
         xhr.open('GET', 'http://localhost:8080/gudetama/webapi/video/list', true);
 
-        xhr.onreadystatechange = function () {//Call a function when the state changes.
-            alert(xhr.readyState + "    " + xhr.status)
+        xhr.onreadystatechange = function () { //Call a function when the state changes.
             if (xhr.readyState == 4 && xhr.status == 200) {
-                videolist = JSON.parse(xhr.responseText);
-                //alert(videolist[0].category.name);
-                alert("apres video list");
-                alert("videotest : " + videoList[0].category.name);
-                alert(videoList.length);
-
+                videoList = JSON.parse(xhr.responseText);
                 for (var i = 0; i < videoList.length; i++) {
-                    alert("for :" + i);
-                    document.write('\
+                    currentDiv.innerHTML = currentDiv.innerHTML + '\
                     <a href="episode.html" class="list-group-item list-group-item-action flex-column align-items-start">\
                         <div class="d-flex w-100 justify-content-between">\
                             <h5 class="mb-1" style="color:#0000CC">Test boucle numero ' + videoList[i].title + '</h5>\
@@ -83,8 +54,7 @@
                         </div>\
                         <p class="mb-1">Gudetama n\'arrive pas à trouver la motivation aujourd\'hui, contrairement à Alex.</p>\
                         <small>Donec id elit non mi porta.</small>\
-                    </a>\
-                    ');
+                    </a>';
 
 
                 }
@@ -94,65 +64,7 @@
         xhr.send();
     </script>
 
-    <!--<a href="episode.html" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#0000CC">Episode 5</h5>
-            <small>Il y a 3 jours</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a id="video1" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#0000CC">Episode 4</h5>
-            <small>Il y a 4 jours</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#0000CC">Episode 3</h5>
-            <small>Il y a 8 jours</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#0000CC">Episode 2</h5>
-            <small>Il y a 11 jours</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" style="color:#0000CC">Episode 1</h5>
-            <small>Il y a 17 jours</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius
-            blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>-->
 </div>
-
-
-<!--<script type="text/javascript">
-    var link = document.getElementById('video1');
-    var href = link.getAttribute('href');
-
-    alert(href);
-
-    link.setAttribute('href', 'episode.html');
-    document.getElementById('video1')
-</script>-->
-
-<script src="episode_list.js"></script>
 
 <script src="http://vjs.zencdn.net/5.17.0/video.js"></script>
 
