@@ -3,11 +3,9 @@ package fr.crystalgems.gudetama.service;
 import fr.crystalgems.gudetama.hibernate.HibernateUtil;
 import fr.crystalgems.gudetama.model.Video;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -46,5 +44,21 @@ public class VideoService {
             throw e;
         }
         return videos;
+    }
+
+    @PUT
+    @Path("delete")
+    @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
+    public Response deleteUser(Video videoToDelete) {
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            Video video = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, videoToDelete.getId());
+            HibernateUtil.getSessionFactory().getCurrentSession().delete(video);
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+        return Response.status(200).build();
     }
 }
