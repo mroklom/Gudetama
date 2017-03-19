@@ -128,7 +128,7 @@ public class UserService {
 
     @PUT
     @Path("bookmark")
-    public Response updateBookmarks(@QueryParam("idUser") int idUser, @QueryParam("idVideo") int idVideo) {
+    public Response updateBookmarks(@QueryParam("idUser") int idUser, @QueryParam("idVideo") int idVideo, @QueryParam("bookmark") boolean bookmark) {
 
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
@@ -136,7 +136,11 @@ public class UserService {
             User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, idUser);
             Video video = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, idVideo);
 
-            user.getBookmarks().add(video);
+            if (bookmark) {
+                user.getBookmarks().add(video);
+            } else {
+                user.getBookmarks().remove(video);
+            }
 
             HibernateUtil.getSessionFactory().getCurrentSession().save(user);
 
