@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Bookmarks</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.7-dist\css\bootstrap.min.css" rel="stylesheet">
+
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+</head>
+
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="navbar.js"></script>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Bookmarks</h1>
+    </div>
+
+</div>
+
+
+<div class="list-group" id="bookmarksDiv">
+
+    <script type="text/javascript">
+        var user = JSON.parse(sessionStorage('user'));
+        var currentDiv = document.getElementById('bookmarksDiv');    
+        var bookmarks = JSON.parse(user.bookmarks);
+        for (var i = bookmarks.length - 1; i >= 0; i--) { //Most recent videos first
+        	currentDiv.innerHTML = currentDiv.innerHTML + '\
+            	<a href="bookmarks.html?id=' + bookmarks[i].id + '" class="list-group-item list-group-item-action flex-column align-items-start">\
+                	<div class="d-flex w-100 justify-content-between">\
+                    	<h5 class="mb-1" style="color:#0000CC">' + bookmarks[i].title + '</h5>\
+                        <small>Il y a 3 jours</small>\
+                    </div>\
+                	<p class="mb-1">Gudetama n\'arrive pas à trouver la motivation aujourd\'hui, contrairement à Alex.</p>\
+                	<small>Donec id elit non mi porta.</small>\
+                </a>';
+            }
+        };
+    </script>
+
+</div>
+
+<script src="http://vjs.zencdn.net/5.17.0/video.js"></script>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+
+</html>
