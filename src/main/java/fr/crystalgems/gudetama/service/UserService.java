@@ -2,6 +2,7 @@ package fr.crystalgems.gudetama.service;
 
 import fr.crystalgems.gudetama.hibernate.HibernateUtil;
 import fr.crystalgems.gudetama.model.User;
+import fr.crystalgems.gudetama.model.Video;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -125,5 +126,27 @@ public class UserService {
         return Response.status(200).build();
     }
 
+    @PUT
+    @Path("bookmark")
+    public Response updateBookmarks(@QueryParam("idUser") int idUser, @QueryParam("idVideo") int idVideo) {
 
+        try {
+            HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+
+            User user = HibernateUtil.getSessionFactory().getCurrentSession().load(User.class, idUser);
+            Video video = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, idVideo);
+
+            user.getBookmarks().add(video);
+
+            HibernateUtil.getSessionFactory().getCurrentSession().save(user);
+
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
+
+        } catch (RuntimeException e) {
+            HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
+            throw e;
+        }
+
+        return Response.status(200).build();
+    }
 }
