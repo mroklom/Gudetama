@@ -13,8 +13,6 @@ public class Rating {
     @Basic
     @Column(nullable = false)
     private int value;
-    @OneToOne(fetch = FetchType.EAGER)
-    private Subtitle subtitle;
 
     public int getId() {
         return id;
@@ -30,13 +28,5 @@ public class Rating {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public Subtitle getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(Subtitle subtilte) {
-        this.subtitle = subtilte;
     }
 }

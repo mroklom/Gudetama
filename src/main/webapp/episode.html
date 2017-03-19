@@ -10,26 +10,10 @@
     <link rel="icon" href="../../favicon.ico">
     <link href="css\index.css" rel="stylesheet">
 
-    <script type="text/javascript">
-        function GetURLParameter(sParam) {
-            var sPageURL = window.location.search.substring(1);
-            var sURLVariables = sPageURL.split('&');
-            for (var i = 0; i < sURLVariables.length; i++) {
-                var sParameterName = sURLVariables[i].split('=');
-                if (sParameterName[0] == sParam) {
-                    return sParameterName[1];
-                }
-            }
-        }
-
-        var pageId = GetURLParameter('id');
-    </script>
-
     <title>Episode</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap-3.3.7-dist\css\bootstrap.min.css" rel="stylesheet">
-
 
 </head>
 
@@ -41,47 +25,8 @@
 <script src="navbar.js"></script>
 
 
-
 <div class="row">
-    <div id="video" class="col-md-offset-3 col-md-6 row extra-bottom-padding">
-        <script type="text/javascript">
-            var xhr = new XMLHttpRequest();
-            var videoList;
-            var currentDiv = document.getElementById('video');
-            xhr.open('GET', 'http://localhost:8080/gudetama/webapi/video/list', true);
-
-            xhr.onreadystatechange = function () { //Call a function when the state changes.
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    videoList = JSON.parse(xhr.responseText);
-                    alert("paht : " + videoList[pageId].path)
-                    currentDiv.innerHTML = currentDiv.innerHTML + '\
-                    <h1>' + videoList[pageId].title + '</h1>\
-                    <div class="embed-responsive embed-responsive-16by9">\
-                        <video width="320" height="240" controls>\
-                            <source src="' + videoList[pageId].path + '" type="video/mp4">\
-                        </video>\
-                    </div>\
-                    <button type="button" class="btn btn-default alignright">\
-                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favoris\
-                    </button>';
-
-                }
-            };
-
-            xhr.send();
-        </script>
-
-
-
-        <!--<h1>Super episode</h1>
-        <div class="embed-responsive embed-responsive-16by9">
-            <video width="320" height="240" controls>
-                <source src="res\gudetama e01.mp4" type="video/mp4">
-            </video>
-        </div>
-        <button type="button" class="btn btn-default alignright">
-            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favoris
-        </button>-->
+    <div id="videoDiv" class="col-md-offset-3 col-md-6 row extra-bottom-padding">
     </div>
 </div>
 
@@ -98,28 +43,7 @@
             <h2>Sous-titres disponibles</h2></div>
 
         <!-- List group -->
-        <ul class="list-group">
-            <li class="list-group-item">Sous-titres de : MrOklom
-                <span class="badge">14</span>
-            </li>
-            <li class="list-group-item">Sous-titres de : Elyos
-                <span class="badge">9</span>
-            </li>
-            <li class="list-group-item">Sous-titres de : John Deuf
-                <span class="badge">8</span>
-            </li>
-            <li class="list-group-item">Sous-titres de : JeanMiDu37
-                <span class="badge">4</span>
-            </li>
-            <li class="list-group-item">Sous-titres de : Plopinou
-                <span class="badge">1</span>
-            </li>
-            <li class="list-group-item">Sous-titres de : Lorem
-                <span class="badge">0</span>
-            </li>
-            <li class="list-group-item">Sous-titres de : Poêle
-                <span class="badge">0</span>
-            </li>
+        <ul id='subtitleList' class="list-group">
         </ul>
     </div>
 </div>
@@ -133,6 +57,83 @@
     </nav>
 </div>
 
+<script type="text/javascript">
+
+    function GetURLParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return sParameterName[1];
+            }
+        }
+    }
+
+    function updateHtml(video, publishers) {
+        var currentDiv = document.getElementById('videoDiv');
+        currentDiv.innerHTML = currentDiv.innerHTML + '\
+            <h1>' + video.title + '</h1>\
+            <div class="embed-responsive embed-responsive-16by9">\
+                <video width="320" height="240" controls="controls" >\
+                    <source src="' + video.path + '" type="video/mp4">\
+                    <track src="' + video.subtitles[0].path + '" kind="subtitles" srclang="fr-FR" label="Français">\
+                </video>\
+                </div>\
+                <button type="button" class="btn btn-default alignright">\
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favoris\
+                </button>\
+             ';
+
+        for (var i = 0; i < video.subtitles.length; i++) {
+            var ratingSum = 0;
+            for (var j = 0; j < video.subtitles[i].ratings.length; j++)
+                ratingSum += video.subtitles[i].ratings[j].value;
+
+            var currentDiv = document.getElementById('subtitleList');
+            currentDiv.innerHTML = currentDiv.innerHTML + '\
+                    <li class="list-group-item">Sous-titre de ' + publishers[i] + '\
+                    <span class="badge">' + ratingSum + '</span>\
+                    </li>\
+                    ';
+
+        }
+    }
+
+    function getPublishers(i) {
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:8080/gudetama/webapi/subtitle/publisher/' + video.subtitles[i].id, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                publishers[i] = xhr.responseText;
+                i++;
+                if (i < video.subtitles.length) {
+                    getPublishers(i);
+                }
+                else {
+                    updateHtml(video, publishers);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    var pageId = GetURLParameter('id');
+    var video;
+    var publishers = [];
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:8080/gudetama/webapi/video/' + pageId, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            video = JSON.parse(xhr.responseText);
+            if (video.subtitles.length > 0) {
+                getPublishers(0);
+            }
+        }
+    };
+    xhr.send();
+</script>
 
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
