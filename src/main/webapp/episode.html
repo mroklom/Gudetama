@@ -72,6 +72,20 @@
 
     function updateHtml(video, publishers) {
         var currentDiv = document.getElementById('videoDiv');
+
+        var fav_type = 'default';
+
+        if (sessionStorage.getItem('user') != null) {
+            var user = JSON.parse(sessionStorage.getItem('user'));
+            for (var i = 0; i < user.bookmarks.length; i++) {
+                if (user.bookmarks[i].id == pageId) {
+                    fav_type = "warning";
+                }
+            }
+        }
+
+        //alert(fav_type);
+
         currentDiv.innerHTML = currentDiv.innerHTML + '\
             <h1>' + video.title + '</h1>\
             <div class="embed-responsive embed-responsive-16by9">\
@@ -80,8 +94,8 @@
                     <track src="' + video.subtitles[0].path + '" kind="subtitles" srclang="fr-FR" label="Français">\
                 </video>\
                 </div>\
-                <button type="button" class="btn btn-default alignright">\
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favoris\
+                <button id ="fav-button" type="button" class="btn btn-' + fav_type + ' alignright" onclick="bookmark()">\
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favoris\
                 </button>\
              ';
 
@@ -116,6 +130,54 @@
             }
         };
         xhr.send();
+    }
+
+    function bookmark() {
+        var toFav = true;
+        var user = JSON.parse(sessionStorage.getItem('user'));
+
+        for (var i = 0; i < user.bookmarks.length; i++) {
+            if (user.bookmarks[i].id == pageId) {
+                toFav = false;
+            }
+        }
+
+        if (!toFav) {
+            //unbookmark video
+
+            for (var i = 0; i < user.bookmarks.length; i++) {
+                if (user.bookmarks[i].id == pageId) {
+                    user.bookmarks[i] = '';
+                }
+            }
+            sessionStorage.setItem('user', JSON.stringify(user));
+
+            document.getElementById("fav-button").setAttribute("class", "btn btn-default alignright");
+
+        } else {
+            //bookmark video
+            user.bookmarks[user.bookmarks.length] = video;
+            sessionStorage.setItem('user', JSON.stringify(user));
+            document.getElementById("fav-button").setAttribute("class", "btn btn-warning alignright");
+        }
+
+        if (sessionStorage.getItem('user') != null) {
+            var xhr = new XMLHttpRequest();
+
+            var idUser = (JSON.parse(sessionStorage.getItem('user'))).id;
+            var idVideo = pageId;
+            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user/bookmark?idUser=' + idUser + '&idVideo=' + idVideo + '&bookmark=' + toFav);
+            /*xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4 && xhr.status == 200) {
+             video = JSON.parse(xhr.responseText);
+             if (video.subtitles.length > 0) {
+             alert('video Favoris');
+             }
+             }
+             };*/
+            xhr.send();
+        }
+
     }
 
     var pageId = GetURLParameter('id');
