@@ -37,12 +37,12 @@
 <div class="list-group" id="bookmarksDiv">
 
     <script type="text/javascript">
-        var user = JSON.parse(sessionStorage('user'));
-        var currentDiv = document.getElementById('bookmarksDiv');    
-        var bookmarks = JSON.parse(user.bookmarks);
+        var user = JSON.parse(sessionStorage.getItem('user'));
+        var currentDiv = document.getElementById('bookmarksDiv');
+        var bookmarks = user.bookmarks;
         for (var i = bookmarks.length - 1; i >= 0; i--) { //Most recent videos first
         	currentDiv.innerHTML = currentDiv.innerHTML + '\
-            	<a href="bookmarks.html?id=' + bookmarks[i].id + '" class="list-group-item list-group-item-action flex-column align-items-start">\
+            	<a href="episode.html?id=' + bookmarks[i].id + '" class="list-group-item list-group-item-action flex-column align-items-start">\
                 	<div class="d-flex w-100 justify-content-between">\
                     	<h5 class="mb-1" style="color:#0000CC">' + bookmarks[i].title + '</h5>\
                         <small>Il y a 3 jours</small>\
@@ -50,8 +50,7 @@
                 	<p class="mb-1">Gudetama n\'arrive pas à trouver la motivation aujourd\'hui, contrairement à Alex.</p>\
                 	<small>Donec id elit non mi porta.</small>\
                 </a>';
-            }
-        };
+        }
     </script>
 
 </div>
