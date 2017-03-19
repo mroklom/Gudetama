@@ -58,6 +58,7 @@
 </div>
 
 <script type="text/javascript">
+
     function GetURLParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
         var sURLVariables = sPageURL.split('&');
@@ -69,7 +70,7 @@
         }
     }
 
-    function updateHtml(video) {
+    function updateHtml(video, publishers) {
         var currentDiv = document.getElementById('videoDiv');
         currentDiv.innerHTML = currentDiv.innerHTML + '\
             <h1>' + video.title + '</h1>\
@@ -88,22 +89,47 @@
             var ratingSum = 0;
             for (var j = 0; j < video.subtitles[i].ratings.length; j++)
                 ratingSum += video.subtitles[i].ratings[j].value;
+
             var currentDiv = document.getElementById('subtitleList');
             currentDiv.innerHTML = currentDiv.innerHTML + '\
-            <li class="list-group-item">Sous-titres de : TODO\
-            <span class="badge">' + ratingSum + '</span>\
+                    <li class="list-group-item">Sous-titre de ' + publishers[i] + '\
+                    <span class="badge">' + ratingSum + '</span>\
                     </li>\
-            ';
+                    ';
+
         }
     }
 
+    function getPublishers(i) {
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://localhost:8080/gudetama/webapi/subtitle/publisher/' + video.subtitles[i].id, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                publishers[i] = xhr.responseText;
+                i++;
+                if (i < video.subtitles.length) {
+                    getPublishers(i);
+                }
+                else {
+                    updateHtml(video, publishers);
+                }
+            }
+        };
+        xhr.send();
+    }
+
     var pageId = GetURLParameter('id');
+    var video;
+    var publishers = [];
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'http://localhost:8080/gudetama/webapi/video/' + pageId, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            updateHtml(JSON.parse(xhr.responseText));
+            video = JSON.parse(xhr.responseText);
+            if (video.subtitles.length > 0) {
+                getPublishers(0);
+            }
         }
     };
     xhr.send();
