@@ -27,7 +27,7 @@ public class Main {
         Video video1 = new Video();
         video1.setTitle("ぐでたまショートアニメ 第735話「スライサー」（3/13放送）");
         video1.setLength(61);
-        video1.setPath("/res/video/e735.mp4");
+        video1.setPath("res/video/e735.mp4");
         calendar.set(2017, Calendar.MARCH, 12);
         video1.setReleaseDate(calendar.getTime());
         video1.setCategory(marsCategory);
@@ -35,7 +35,7 @@ public class Main {
         Video video2 = new Video();
         video2.setTitle("ぐでたまショートアニメ 第736話「ホワイトデーのお返し」（3/14放送） ");
         video2.setLength(61);
-        video2.setPath("/res/video/e736.mp4");
+        video2.setPath("res/video/e736.mp4");
         calendar.set(2017, Calendar.MARCH, 13);
         video2.setReleaseDate(calendar.getTime());
         video2.setCategory(marsCategory);
@@ -43,7 +43,7 @@ public class Main {
         Video video3 = new Video();
         video3.setTitle("ぐでたまショートアニメ 第737話「押すなよ、押すなよ？」（3/15放送） ");
         video3.setLength(61);
-        video3.setPath("/res/video/e737.mp4");
+        video3.setPath("res/video/e737.mp4");
         calendar.set(2017, Calendar.MARCH, 14);
         video3.setReleaseDate(calendar.getTime());
         video3.setCategory(piCategory);
@@ -51,7 +51,7 @@ public class Main {
         Video video4 = new Video();
         video4.setTitle("ぐでたまショートアニメ 第738話「浦島ニセ太郎」（3/16放送） ");
         video4.setLength(61);
-        video4.setPath("/res/video/e738.mp4");
+        video4.setPath("res/video/e738.mp4");
         calendar.set(2017, Calendar.MARCH, 15);
         video4.setReleaseDate(calendar.getTime());
         video4.setCategory(projectCategory);
@@ -59,7 +59,7 @@ public class Main {
         Video video5 = new Video();
         video5.setTitle("ぐでたまショートアニメ 第739話「旅立ち」（3/17放送） ");
         video5.setLength(61);
-        video5.setPath("/res/video/e739.mp4");
+        video5.setPath("res/video/e739.mp4");
         calendar.set(2017, Calendar.MARCH, 16);
         video5.setReleaseDate(calendar.getTime());
         video5.setCategory(projectCategory);
@@ -93,40 +93,40 @@ public class Main {
         user4.setBookmarks(new HashSet<>(Arrays.asList(video4, video5)));
 
         Subtitle subtitle1 = new Subtitle();
-        subtitle1.setPath("/res/subtitle/slicer_sub.srt");
+        subtitle1.setPath("res/subtitle/slicer_sub.srt");
 
         Subtitle subtitle2 = new Subtitle();
-        subtitle2.setPath("/res/subtitle/revenir pour White Day_sub.srt");
+        subtitle2.setPath("res/subtitle/revenir pour White Day_sub.srt");
 
         user1.setSubtitles(new HashSet<>(Arrays.asList(subtitle1, subtitle2)));
 
         Subtitle subtitle3 = new Subtitle();
-        subtitle3.setPath("/res/subtitle/Journey_sub.srt");
+        subtitle3.setPath("res/subtitle/Journey_sub.srt");
 
         user2.setSubtitles(new HashSet<>(Arrays.asList(subtitle3)));
 
         Subtitle subtitle4 = new Subtitle();
-        subtitle4.setPath("/res/subtitle/Je ne pas appuyer sur, vous n'appuyez sur_sub.srt");
+        subtitle4.setPath("res/subtitle/Je ne pas appuyer sur, vous n'appuyez sur_sub.srt");
 
         Subtitle subtitle5 = new Subtitle();
-        subtitle5.setPath("/res/subtitle/false Urashima Taro_sub.srt");
+        subtitle5.setPath("res/subtitle/false Urashima Taro_sub.srt");
 
         user4.setSubtitles(new HashSet<>(Arrays.asList(subtitle4, subtitle5)));
 
         Subtitle subtitle6 = new Subtitle();
-        subtitle6.setPath("/res/subtitle/ep735.srt");
+        subtitle6.setPath("res/subtitle/ep735.srt");
 
         Subtitle subtitle7 = new Subtitle();
-        subtitle7.setPath("/res/subtitle/ep736.srt");
+        subtitle7.setPath("res/subtitle/ep736.srt");
 
         Subtitle subtitle8 = new Subtitle();
-        subtitle8.setPath("/res/subtitle/ep737.srt");
+        subtitle8.setPath("res/subtitle/ep737.srt");
 
         Subtitle subtitle9 = new Subtitle();
-        subtitle9.setPath("/res/subtitle/ep738.srt");
+        subtitle9.setPath("res/subtitle/ep738.srt");
 
         Subtitle subtitle10 = new Subtitle();
-        subtitle10.setPath("/res/subtitle/ep739.srt");
+        subtitle10.setPath("res/subtitle/ep739.srt");
 
         user3.setSubtitles(new HashSet<>(Arrays.asList(subtitle6, subtitle7, subtitle8, subtitle9, subtitle10)));
 
