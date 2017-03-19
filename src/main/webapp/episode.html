@@ -22,6 +22,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+<nav id=navbar class="navbar navbar-default" role="navigation">\
+</nav>
 <script src="navbar.js"></script>
 
 
@@ -107,7 +109,13 @@
             var currentDiv = document.getElementById('subtitleList');
             currentDiv.innerHTML = currentDiv.innerHTML + '\
                     <li class="list-group-item">Sous-titre de ' + publishers[i] + '\
-                    <span class="badge">' + ratingSum + '</span>\
+                        <button type="button" class="btn btn-default btn-xs" style="float: right" aria-label="-1">\
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"/>\
+                        </button> \
+                        <button type="button" class="btn btn-default btn-xs" style="float: right" aria-label="+1">\
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"/>\
+                        </button> \
+                        <span class="label label-default" style="float: right">' + ratingSum + '</span>\
                     </li>\
                     ';
 
