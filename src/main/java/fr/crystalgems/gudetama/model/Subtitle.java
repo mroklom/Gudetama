@@ -15,8 +15,7 @@ public class Subtitle {
     @Basic
     @Column(nullable = false, unique = true)
     private String path;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User publisher;
+
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Rating> ratings;
 
@@ -34,14 +33,6 @@ public class Subtitle {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public User getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(User publisher) {
-        this.publisher = publisher;
     }
 
     public Set<Rating> getRatings() {

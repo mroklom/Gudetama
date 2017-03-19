@@ -27,7 +27,7 @@ public class Main {
         Video video1 = new Video();
         video1.setTitle("ぐでたまショートアニメ 第735話「スライサー」（3/13放送）");
         video1.setLength(61);
-        video1.setPath("/res/video/e735.mp4");
+        video1.setPath("res/video/e735.mp4");
         calendar.set(2017, Calendar.MARCH, 12);
         video1.setReleaseDate(calendar.getTime());
         video1.setCategory(marsCategory);
@@ -35,7 +35,7 @@ public class Main {
         Video video2 = new Video();
         video2.setTitle("ぐでたまショートアニメ 第736話「ホワイトデーのお返し」（3/14放送） ");
         video2.setLength(61);
-        video2.setPath("/res/video/e736.mp4");
+        video2.setPath("res/video/e736.mp4");
         calendar.set(2017, Calendar.MARCH, 13);
         video2.setReleaseDate(calendar.getTime());
         video2.setCategory(marsCategory);
@@ -43,7 +43,7 @@ public class Main {
         Video video3 = new Video();
         video3.setTitle("ぐでたまショートアニメ 第737話「押すなよ、押すなよ？」（3/15放送） ");
         video3.setLength(61);
-        video3.setPath("/res/video/e737.mp4");
+        video3.setPath("res/video/e737.mp4");
         calendar.set(2017, Calendar.MARCH, 14);
         video3.setReleaseDate(calendar.getTime());
         video3.setCategory(piCategory);
@@ -51,7 +51,7 @@ public class Main {
         Video video4 = new Video();
         video4.setTitle("ぐでたまショートアニメ 第738話「浦島ニセ太郎」（3/16放送） ");
         video4.setLength(61);
-        video4.setPath("/res/video/e738.mp4");
+        video4.setPath("res/video/e738.mp4");
         calendar.set(2017, Calendar.MARCH, 15);
         video4.setReleaseDate(calendar.getTime());
         video4.setCategory(projectCategory);
@@ -59,7 +59,7 @@ public class Main {
         Video video5 = new Video();
         video5.setTitle("ぐでたまショートアニメ 第739話「旅立ち」（3/17放送） ");
         video5.setLength(61);
-        video5.setPath("/res/video/e739.mp4");
+        video5.setPath("res/video/e739.mp4");
         calendar.set(2017, Calendar.MARCH, 16);
         video5.setReleaseDate(calendar.getTime());
         video5.setCategory(projectCategory);
@@ -93,50 +93,40 @@ public class Main {
         user4.setBookmarks(new HashSet<>(Arrays.asList(video4, video5)));
 
         Subtitle subtitle1 = new Subtitle();
-        subtitle1.setPath("/res/subtitle/slicer_sub.srt");
-        subtitle1.setPublisher(user1);
+        subtitle1.setPath("res/subtitle/slicer_sub.srt");
 
         Subtitle subtitle2 = new Subtitle();
-        subtitle2.setPath("/res/subtitle/revenir pour White Day_sub.srt");
-        subtitle2.setPublisher(user1);
+        subtitle2.setPath("res/subtitle/revenir pour White Day_sub.srt");
 
         user1.setSubtitles(new HashSet<>(Arrays.asList(subtitle1, subtitle2)));
 
         Subtitle subtitle3 = new Subtitle();
-        subtitle3.setPath("/res/subtitle/Journey_sub.srt");
-        subtitle3.setPublisher(user2);
+        subtitle3.setPath("res/subtitle/Journey_sub.srt");
 
         user2.setSubtitles(new HashSet<>(Arrays.asList(subtitle3)));
 
         Subtitle subtitle4 = new Subtitle();
-        subtitle4.setPath("/res/subtitle/Je ne pas appuyer sur, vous n'appuyez sur_sub.srt");
-        subtitle4.setPublisher(user4);
+        subtitle4.setPath("res/subtitle/Je ne pas appuyer sur, vous n'appuyez sur_sub.srt");
 
         Subtitle subtitle5 = new Subtitle();
-        subtitle5.setPath("/res/subtitle/false Urashima Taro_sub.srt");
-        subtitle5.setPublisher(user4);
+        subtitle5.setPath("res/subtitle/false Urashima Taro_sub.srt");
 
         user4.setSubtitles(new HashSet<>(Arrays.asList(subtitle4, subtitle5)));
 
         Subtitle subtitle6 = new Subtitle();
-        subtitle6.setPath("/res/subtitle/ep735.srt");
-        subtitle6.setPublisher(user3);
+        subtitle6.setPath("res/subtitle/ep735.srt");
 
         Subtitle subtitle7 = new Subtitle();
-        subtitle7.setPath("/res/subtitle/ep736.srt");
-        subtitle7.setPublisher(user3);
+        subtitle7.setPath("res/subtitle/ep736.srt");
 
         Subtitle subtitle8 = new Subtitle();
-        subtitle8.setPath("/res/subtitle/ep737.srt");
-        subtitle8.setPublisher(user3);
+        subtitle8.setPath("res/subtitle/ep737.srt");
 
         Subtitle subtitle9 = new Subtitle();
-        subtitle9.setPath("/res/subtitle/ep738.srt");
-        subtitle9.setPublisher(user3);
+        subtitle9.setPath("res/subtitle/ep738.srt");
 
         Subtitle subtitle10 = new Subtitle();
-        subtitle10.setPath("/res/subtitle/ep739.srt");
-        subtitle10.setPublisher(user3);
+        subtitle10.setPath("res/subtitle/ep739.srt");
 
         user3.setSubtitles(new HashSet<>(Arrays.asList(subtitle6, subtitle7, subtitle8, subtitle9, subtitle10)));
 
@@ -147,53 +137,42 @@ public class Main {
         video5.setSubtitles(new HashSet<>(Arrays.asList(subtitle5, subtitle10)));
 
         Rating rating1 = new Rating();
-        rating1.setSubtitle(subtitle6);
         rating1.setValue(1);
 
         Rating rating2 = new Rating();
-        rating2.setSubtitle(subtitle7);
         rating2.setValue(1);
 
         Rating rating3 = new Rating();
-        rating3.setSubtitle(subtitle8);
         rating3.setValue(1);
 
         Rating rating4 = new Rating();
-        rating4.setSubtitle(subtitle9);
         rating4.setValue(1);
 
         Rating rating5 = new Rating();
-        rating5.setSubtitle(subtitle10);
         rating5.setValue(1);
 
         user2.setRatings(new HashSet<>(Arrays.asList(rating1, rating2, rating3, rating4, rating5)));
 
         Rating rating6 = new Rating();
-        rating6.setSubtitle(subtitle9);
         rating6.setValue(-1);
 
         Rating rating7 = new Rating();
-        rating7.setSubtitle(subtitle1);
         rating7.setValue(1);
 
         user1.setRatings(new HashSet<>(Arrays.asList(rating6, rating7)));
 
         Rating rating8 = new Rating();
-        rating8.setSubtitle(subtitle2);
         rating8.setValue(-1);
 
         user3.setRatings(new HashSet<>(Arrays.asList(rating8)));
 
         Rating rating9 = new Rating();
-        rating9.setSubtitle(subtitle2);
         rating9.setValue(1);
 
         Rating rating10 = new Rating();
-        rating10.setSubtitle(subtitle3);
         rating10.setValue(-1);
 
         Rating rating11 = new Rating();
-        rating11.setSubtitle(subtitle5);
         rating11.setValue(-1);
 
         user4.setRatings(new HashSet<>(Arrays.asList(rating9, rating10, rating11)));

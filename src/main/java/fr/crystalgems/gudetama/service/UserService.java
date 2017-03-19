@@ -45,6 +45,7 @@ public class UserService {
         return Response.status(201).build();
     }
 
+    @GET
     @Path("connexion")
     @Produces(MediaType.APPLICATION_JSON + "; charset=UTF-8")
     public User connexion(@QueryParam("email") String email, @QueryParam("password") String password) {
