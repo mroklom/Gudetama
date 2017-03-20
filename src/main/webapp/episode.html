@@ -100,13 +100,12 @@
                     <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Favoris\
                 </button>\
              ';
-             
-        if(user.admin == true){
-        	currentDiv.innerHTML = currentDiv.innerHTML + '\
-        		<button id ="fav-button" type="button" class="btn btn-warning alignright" onclick="suppr()">\
-            		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer\
-            	</button>\	
-            ';
+
+        if (user != undefined && user.admin == true) {
+            currentDiv.innerHTML = currentDiv.innerHTML +
+                '<button id ="suppr-video-button" type="button" class="btn btn-danger alignright" onclick="suppr()">' +
+                '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer' +
+                '</button>';
         }
 
         for (var i = 0; i < video.subtitles.length; i++) {
@@ -126,19 +125,18 @@
                         <span class="label label-default" style="float: right">' + ratingSum + '</span>\
                     </li>\
                     ';
-            if(user.admin == true){
-        		currentDiv.innerHTML = currentDiv.innerHTML + '\
-        			<button id ="fav-button" type="button" class="btn btn-warning alignright" onclick="supprSub(video.subtiles[i].id)">\
-            			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer\
-            		</button>\	
-            	';
-        	}
+            if (user != undefined && user.admin == true) {
+                currentDiv.innerHTML = currentDiv.innerHTML +
+                    '<button id ="suppr-sub-button" type="button" class="btn btn-danger btn-xs" style="float: right" onclick="supprSub(video.subtiles[i].id)">' +
+                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer' +
+                    '</button>';
+            }
         }
     }
 
     function getPublishers(i) {
         xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://localhost:8080/gudetama/webapi/subtitle/publisher/' + video.subtitles[i].id, true);
+        xhr.open('GET', serverAddr + '/gudetama/webapi/subtitle/publisher/' + video.subtitles[i].id, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 publishers[i] = xhr.responseText;
@@ -153,20 +151,25 @@
         };
         xhr.send();
     }
-    
-    function suppr(){
-            var xhr = new XMLHttpRequest();
-            var idVideo = pageId;
-            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/video?id=' + idVideo);
-            xhr.send();
-            document.location.href =\'index.html\';
+
+    function suppr() {
+        var xhr = new XMLHttpRequest();
+        var idVideo = pageId;
+        xhr.open('PUT', serverAddr + '/gudetama/webapi/video/delete?id=' + idVideo);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert('Vidéo supprimée');
+                document.location.href = 'index.html';
+            }
+        };
+        xhr.send();
     }
-    
-    function supprSub(idSubtitle){
-            var xhr = new XMLHttpRequest();
-            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/subtitle?id=' + idSubtitle);
-            xhr.send();
-            document.location.reload();
+
+    function supprSub(idSubtitle) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', serverAddr + '/gudetama/webapi/subtitle/delete?id=' + idSubtitle);
+        xhr.send();
+        document.location.reload();
     }
 
     function bookmark() {
@@ -203,7 +206,7 @@
 
             var idUser = (JSON.parse(sessionStorage.getItem('user'))).id;
             var idVideo = pageId;
-            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user/bookmark?idUser=' + idUser + '&idVideo=' + idVideo + '&bookmark=' + toFav);
+            xhr.open('PUT', serverAddr + '/gudetama/webapi/user/bookmark?idUser=' + idUser + '&idVideo=' + idVideo + '&bookmark=' + toFav);
             /*xhr.onreadystatechange = function () {
              if (xhr.readyState == 4 && xhr.status == 200) {
              video = JSON.parse(xhr.responseText);
@@ -222,7 +225,7 @@
     var publishers = [];
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:8080/gudetama/webapi/video/' + pageId, true);
+    xhr.open('GET', serverAddr + '/gudetama/webapi/video/' + pageId, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             video = JSON.parse(xhr.responseText);

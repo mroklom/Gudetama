@@ -1,3 +1,4 @@
+var serverAddr = 'http://localhost:8080';
 if (sessionStorage.length == 0)
     document.getElementById('navbar').innerHTML = '\
     <div class="navbar-header">\
