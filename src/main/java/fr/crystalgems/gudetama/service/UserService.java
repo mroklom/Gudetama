@@ -62,11 +62,9 @@ public class UserService {
             throw e;
         }
 
-        if (user != null) {
-            if (user.getPassword().equals(password)) {
-                user.setPassword(null);
-                return user;
-            }
+        if (user != null && user.getPassword().equals(password)) {
+            user.setPassword(null);
+            return user;
         }
         return null;
     }
@@ -79,14 +77,14 @@ public class UserService {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 
             List result = HibernateUtil.getSessionFactory().getCurrentSession().createQuery("from User E where E.email = '" + email + "'").list();
-            response = result.size() == 0;
+            response = result.isEmpty();
 
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             throw e;
         }
-        return new Boolean(response);
+        return Boolean.valueOf(response);
     }
 
     @PUT

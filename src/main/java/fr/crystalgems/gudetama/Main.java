@@ -12,6 +12,10 @@ import java.util.HashSet;
  * Created by valen on 07/03/2017.
  */
 public class Main {
+
+    private Main() {
+    }
+
     public static void main(final String[] args) throws Exception {
         Calendar calendar = Calendar.getInstance();
 
@@ -235,6 +239,7 @@ public class Main {
         } catch (HibernateException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }
