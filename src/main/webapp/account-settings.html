@@ -115,7 +115,7 @@
             user.email = newEmail;
             user.password = newPassword;
             // Send http request
-            xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user', true);
+            xhr.open('PUT', serverAddr + '/gudetama/webapi/user', true);
             xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
@@ -140,7 +140,7 @@
     function deleteUser() {
         // Send http request
         var xhr = new XMLHttpRequest();
-        xhr.open('PUT', 'http://localhost:8080/gudetama/webapi/user/delete', true);
+        xhr.open('PUT', serverAddr + '/gudetama/webapi/user/delete', true);
         xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
