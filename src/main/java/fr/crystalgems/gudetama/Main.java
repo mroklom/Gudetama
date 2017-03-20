@@ -239,7 +239,7 @@ public class Main {
         } catch (HibernateException e) {
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().rollback();
             e.printStackTrace();
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 }
