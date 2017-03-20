@@ -31,10 +31,10 @@ public class SubtitleServcie {
     @PUT
     @Path("delete")
     @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public Response deleteUser(Subtitle subtitleToDelete) {
+    public Response deleteUser(@QueryParam("id") int id) {
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
-            Subtitle subtitle = HibernateUtil.getSessionFactory().getCurrentSession().load(Subtitle.class, subtitleToDelete.getId());
+            Subtitle subtitle = HibernateUtil.getSessionFactory().getCurrentSession().load(Subtitle.class, id);
             HibernateUtil.getSessionFactory().getCurrentSession().delete(subtitle);
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {

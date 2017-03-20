@@ -151,20 +151,25 @@
         };
         xhr.send();
     }
-    
-    function suppr(){
-            var xhr = new XMLHttpRequest();
-            var idVideo = pageId;
-        xhr.open('PUT', serverAddr + '/gudetama/webapi/video?id=' + idVideo);
-            xhr.send();
-        document.location.href = 'index.html';
+
+    function suppr() {
+        var xhr = new XMLHttpRequest();
+        var idVideo = pageId;
+        xhr.open('PUT', serverAddr + '/gudetama/webapi/video/delete?id=' + idVideo);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert('Vidéo supprimée');
+                document.location.href = 'index.html';
+            }
+        };
+        xhr.send();
     }
-    
-    function supprSub(idSubtitle){
-            var xhr = new XMLHttpRequest();
-        xhr.open('PUT', serverAddr + '/gudetama/webapi/subtitle?id=' + idSubtitle);
-            xhr.send();
-            document.location.reload();
+
+    function supprSub(idSubtitle) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', serverAddr + '/gudetama/webapi/subtitle/delete?id=' + idSubtitle);
+        xhr.send();
+        document.location.reload();
     }
 
     function bookmark() {

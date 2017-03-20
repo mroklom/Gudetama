@@ -49,10 +49,11 @@ public class VideoService {
     @PUT
     @Path("delete")
     @Consumes(MediaType.APPLICATION_JSON + "; charset=UTF-8")
-    public Response deleteUser(Video videoToDelete) {
+    public Response deleteUser(@QueryParam("id") int id) {
         try {
             HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
-            Video video = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, videoToDelete.getId());
+            Video video = HibernateUtil.getSessionFactory().getCurrentSession().load(Video.class, id);
+            HibernateUtil.getSessionFactory().getCurrentSession().detach(video);
             HibernateUtil.getSessionFactory().getCurrentSession().delete(video);
             HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
         } catch (RuntimeException e) {
