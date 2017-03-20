@@ -40,18 +40,21 @@
 
     <script type="text/javascript">
         var user = JSON.parse(sessionStorage.getItem('user'));
+        var monthNames = ["janvier", "février", "mars", "avril", "mai", "juin",
+            "juillet", "août", "septembre", "octobre", "novembre", "décembre"
+        ];
         var currentDiv = document.getElementById('bookmarksDiv');
         var bookmarks = user.bookmarks;
         for (var i = bookmarks.length - 1; i >= 0; i--) { //Most recent videos first
         	currentDiv.innerHTML = currentDiv.innerHTML + '\
-            	<a href="episode.html?id=' + bookmarks[i].id + '" class="list-group-item list-group-item-action flex-column align-items-start">\
-                	<div class="d-flex w-100 justify-content-between">\
-                    	<h5 class="mb-1" style="color:#0000CC">' + bookmarks[i].title + '</h5>\
-                        <small>Il y a 3 jours</small>\
-                    </div>\
-                	<p class="mb-1">Gudetama n\'arrive pas à trouver la motivation aujourd\'hui, contrairement à Alex.</p>\
-                	<small>Donec id elit non mi porta.</small>\
-                </a>';
+            	 <a href="episode.html?id=' + bookmarks[i].id + '" class="list-group-item list-group-item-action flex-column align-items-start">\
+                            <div class="d-flex w-100 justify-content-between">\
+                                <h5 class="mb-1" style="color:#0000CC">' + bookmarks[i].title + '</h5>\
+                                <small>' + new Date(bookmarks[i].releaseDate).getDate() + ' ' + monthNames[new Date(bookmarks[i].releaseDate).getMonth()] + ' ' + new Date(bookmarks[i].releaseDate).getFullYear() + ' -- ' + bookmarks[i].length + 'minutes</small>\
+                            </div>\
+                            <p class="mb-1">Categorie : ' + bookmarks[i].category.name + '</p>\
+                            <small>' + bookmarks[i].subtitles.length + ' sous-titre(s) sont disponible(s).</small>\
+                        </a>';
         }
     </script>
 
